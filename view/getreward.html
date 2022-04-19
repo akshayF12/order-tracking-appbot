@@ -1,0 +1,60 @@
+<div class="getreward_point_body">
+    <div class="header_oder_track text-center">
+        <h2 class="user_point">761</h2>
+     </div>
+  <div class="track_oder_body">
+    <form id="coupon_data">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          name="email"
+        />
+        <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+      </div>
+      <div class="mb-3">
+        <label for="customer_phone_number" class="form-label"
+          >Phone Number</label
+        >
+        <input
+          type="text"
+          name="phone"  
+          class="form-control"
+          id="customer_phone_number"
+        />
+      </div>
+
+      <button id="get_coupon" class="btn btn_track_order">get coupon</button>
+    </form>
+  </div>
+<script>
+    $(document).ready(function() {
+                $("#get_coupon").click(function(e) {
+                    e.preventDefault();
+                     var x = $("#coupon_data").serializeArray();
+                      const emailAddress = x[0].value;
+                      const phoneNo = x[1].value;  
+                      console.log(emailAddress,phoneNo);
+                      checkCoupondata(emailAddress, phoneNo);
+                });
+              
+ async function checkCoupondata(emailAddress,phoneNo) {
+            $.ajax({
+                 url: `https://wmt7gctnoc.execute-api.us-east-2.amazonaws.com/default/ShopifyAppProxy?client_id=https://test-store-bob.myshopify.com&type=generate_coupon&phone=${phoneNo}&email=${emailAddress}&points=1`,
+                 type: "GET",
+                beforeSend: function(xhr){xhr.setRequestHeader('Accept', '*/*');},
+                success: function(data) { 
+                    if (data.code) {
+                        getrewardCode(data);
+                    }
+                }
+         });
+    
+    };     
+});
+</script>
+  
+</div>

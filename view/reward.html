@@ -1,0 +1,79 @@
+<div class="check_point_body">
+  <div class="row">
+    <div class="header_oder_track text-center">
+       Check Point
+      <p class="text_check_mow">
+        Enter your phone number to know how many reward points you
+      </p>
+    </div>
+    <div class="track_oder_body" id="check_now_body">
+      <form id="check_now">
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label"
+            >Phone Number</label
+          >
+          <input
+            type="number
+                  "
+            class="form-control"
+            id="customer_phone_number"
+            name="phone"
+          />
+        </div>
+      </form>
+      <button class="btn btn_track_order" id="check">Check Now</button>
+    </div>
+
+    <div class="error_message">
+      <span class="text-danger"></span>
+    </div>
+  </div>
+  
+  <script>
+
+    $(document).ready(function() {
+            $("#check").click(function() {
+                var x = $("#check_now").serializeArray();
+                const phoneNo = x[0].value;
+                 getcheckPoint(phoneNo);
+                  
+            });
+    });
+
+        async function getcheckPoint(phoneNo) {
+        $.ajax({
+             url: `https://wmt7gctnoc.execute-api.us-east-2.amazonaws.com/default/ShopifyAppProxy?client_id=https://test-store-bob.myshopify.com&type=reward_points&phone=${phoneNo}`,
+             type: "GET",
+            beforeSend: function(xhr){xhr.setRequestHeader('Accept', '*/*');},
+            success: function(data) {if(data.discount_capable == false || data.message) {
+              apierrorDataCheck(data);  
+            }else{
+               $('#check_now_body').hide(); 
+                appendDataCheck(data);
+            }
+        }
+     });
+    }
+
+
+    function apierrorDataCheck(data){
+        $('.error_message').show();
+        if ($('.error_message span').length > 0) {
+            $('.error_message span').empty();
+        }
+        if (data.discount_capable == false) {
+         $('.error_message span').append(`No Reward Point`)  
+        };
+        
+        console.log(data)
+    }
+    
+    
+    
+    function appendDataCheck(data){
+        $('.check_point_body').remove();
+        getPointReward(data);
+    };
+
+  </script>
+</div>

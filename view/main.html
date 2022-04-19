@@ -1,0 +1,68 @@
+
+<section class="wigets_app cx-main-container" id="app_bussinebot">
+    <script>
+    $('.close_wigets').click(function(){
+        $('.wigets_app').removeClass('open');
+    });
+    </script>
+    <div class="sigle">
+        <div class="header_wraper">
+            <div class="row header_section">
+                <div class="col-12">
+                    <div class="header_text position-relative">
+                        <p class="m-0 text-center">help</p>
+                        <span class="close_wigets">X</span>
+                        <span class="back_arrow" onclick="onclickBackArrow();" page="main_index_body" id="page"> 
+                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                        </svg>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="wigets_body">
+            <div class="spinner-border" role="status" id="app_spinner">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            <div class="container">
+                <div class="section_inner main_inner_section">
+                    <div class="action_wraper " id="app_index_body">
+                       <div class="row"> 
+                        <div class="col-6 d-flex text-center track_oder_section action_box">
+                            <img src="https://6580-122-170-106-103.ngrok.io/view/Icon feather-truck.png" alt="track order" >
+                            <p id="track_order_btn" onclick="trackorderPage();">Track order</p>
+                        </div>
+                        <div class="col-6 d-flex text-center track_oder_section action_box">
+                            <img src="https://6580-122-170-106-103.ngrok.io/view/Icon feather-gift.png" alt="reward">
+                            <p onclick="checkrewardtPage();">Reward</p>
+                        </div>
+                        <div class="col-6 d-flex text-center track_oder_section action_box">
+                            <img src="https://6580-122-170-106-103.ngrok.io/view/Icon awesome-whatsapp.png" alt="whatapp">
+                            <p id="whats_app" onclick="whatsappPage()">Whatsapp</p>
+                        </div>
+                        <div class="col-6 d-flex text-center track_oder_section action_box">
+                            <img src="https://6580-122-170-106-103.ngrok.io/view/Icon material-favorite-border.png" alt="faq">
+                            <p id="faq" onclick="faqPage()">faq</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="text-center w-100 wigets_footer">
+            <p>Powered by bussinessbot</p>
+        </div>
+
+
+    </div>
+
+    <script>
+       
+
+    </script>
+</section>
