@@ -20002,8 +20002,8 @@
     padding-bottom: 10px;
 }
 .wigets_body {
-    margin-top: 30px;
-    /* margin-bottom: 60px; */
+    margin-top: 15px;
+    margin-bottom: 15px;
     min-height: 300px;
 }
 .action_box p{
@@ -20161,8 +20161,6 @@
 	.sigle{
 	 width: 100%;
 	 margin-left: 0;
-	 padding-left: 15px;
-	 padding-right: 15px;	
 	}
 	.action_wraper .action_box {
 		width: 100%;

@@ -12,14 +12,14 @@ var po = document.createElement('script');
 (function() {
         setTimeout(() => {
             $.ajax ({
-                url: `https://6580-122-170-106-103.ngrok.io/shop-app-active-status-frontend?shop=${ord_domain}`,
+                url: `https://3fcb-122-170-106-103.ngrok.io/shop-app-active-status-frontend?shop=${ord_domain}`,
                 type: "GET",
                 beforeSend: function(xhr){xhr.setRequestHeader('Accept', '*/*');},
                 success:  function(data) {  
                   if (data.app_status == 'Disabled') {
                      return; 
                   }else{
-                    // $('head').append('<link href="https://6580-122-170-106-103.ngrok.io/newapp.css" rel="stylesheet" crossorigin="anonymous">');
+                    // $('head').append('<link href="https://3fcb-122-170-106-103.ngrok.io/newapp.css" rel="stylesheet" crossorigin="anonymous">');
                     $('body').append('<button class="btn wigets_btn" id="app_btn" onclick="onclickAppbutton();">orderTrack</button>')
                     appendApp();
                   }
@@ -33,7 +33,7 @@ var po = document.createElement('script');
  function  appendApp (open) {    
     $(document).ready(function() {
         $.ajax ({
-            url: "https://6580-122-170-106-103.ngrok.io/wigets-index",
+            url: "https://3fcb-122-170-106-103.ngrok.io/wigets-index",
             type: "GET",
             beforeSend: function(xhr){xhr.setRequestHeader('Accept', '*/*');},
             success:  function(data) { 
@@ -77,7 +77,7 @@ const getRewardData = async () => {
         $('#app_spinner').show();
   
         $.ajax({
-            url: "https://6580-122-170-106-103.ngrok.io/get-reward-point",
+            url: "https://3fcb-122-170-106-103.ngrok.io/get-reward-point",
             type: "GET",
             beforeSend: function(xhr){xhr.setRequestHeader('Accept', '*/*');},
             success: function(data) { 
@@ -100,7 +100,7 @@ function checkrewardtPage() {
         $('#app_spinner').show();
   
         $.ajax({
-            url: "https://6580-122-170-106-103.ngrok.io/check-reward-point",
+            url: "https://3fcb-122-170-106-103.ngrok.io/check-reward-point",
             type: "GET",
             beforeSend: function(xhr){xhr.setRequestHeader('Accept', '*/*');},
             success: function(data) { 
@@ -124,7 +124,7 @@ $('#page').attr('page', 'track_oder_body');
 $('#app_index_body').empty();    
 $('#app_spinner').show();
 $.ajax({
-    url: "https://6580-122-170-106-103.ngrok.io/faq-page",
+    url: "https://3fcb-122-170-106-103.ngrok.io/faq-page",
     type: "GET",
     beforeSend: function(xhr){xhr.setRequestHeader('Accept', '*/*');},
     success: function(data) { 
@@ -149,7 +149,7 @@ function trackorderPage() {
       $('#app_spinner').show();
 
       $.ajax({
-          url: "https://6580-122-170-106-103.ngrok.io/track-order",
+          url: "https://3fcb-122-170-106-103.ngrok.io/track-order",
           type: "GET",
           beforeSend: function(xhr){xhr.setRequestHeader('Accept', '*/*');},
           success: function(data) { 
@@ -187,7 +187,7 @@ const getcodeData = async(data) => {
         $('#page').attr('page', 'code_discount_body');
         $('#app_index_body').empty();
             $.ajax({
-                url: "https://6580-122-170-106-103.ngrok.io/get-code-dicount",
+                url: "https://3fcb-122-170-106-103.ngrok.io/get-code-dicount",
                 type: "GET",
                 beforeSend: function(xhr){xhr.setRequestHeader('Accept', '*/*');},
                 success: function(data) { 
