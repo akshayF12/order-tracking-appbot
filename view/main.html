@@ -1,68 +1,240 @@
-
 <section class="wigets_app cx-main-container" id="app_bussinebot">
-    <script>
-    $('.close_wigets').click(function(){
-        $('.wigets_app').removeClass('open');
+  <script>
+    $(".close_wigets").click(function () {
+      $(".wigets_app").removeClass("open");
+      $("#app_btn").removeClass("wigets_btn_active");
     });
-    </script>
-    <div class="sigle">
-        <div class="header_wraper">
-            <div class="row header_section">
-                <div class="col-12">
-                    <div class="header_text position-relative">
-                        <p class="m-0 text-center">help</p>
-                        <span class="close_wigets">X</span>
-                        <span class="back_arrow" onclick="onclickBackArrow();" page="main_index_body" id="page"> 
-                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-                        </svg>
-                        </span>
-                    </div>
+    $.ajax({
+      url: `https://wmt7gctnoc.execute-api.us-east-2.amazonaws.com/default/ShopifyAppProxy?type=shopify_widget_details&client_id=https://${ord_domain}`,
+      type: "GET",
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader("Accept", "*/*");
+      },
+      timeout: 5000,
+    })
+      .done(function (data, textStatus, jqXHR) {
+        setheaderSettings(data.text, data.colors);
+      })
+      .fail(function (jqXHR, textStatus, errorThrown) {
+        console.log("widgets api fail :: ", errorThrown);
+      });
+    const setheaderSettings = (text, colors) => {
+      $(".text-header-app h2").empty();
+      $(".text-header-app p").empty();
+      $(".text-header-app h2, .text-header-app p").css(
+        "color",
+        `${colors.secondaryColor}`
+      );
+      $(".text-header-app h2").append(`${text.faqHeader}`);
+      $(".text-header-app p").append(`${text.faqSubHeading}`);
+    };
 
-                </div>
-            </div>
-        </div>
+    const hide_ans = () => {
+      $(".slidingDiv").toggle("fade");
+      setTimeout(() => {
+        $(".que_wraper").toggleClass("que_toggle");
+      }, 300);
+    };
+  </script>
 
-        <div class="wigets_body">
-            <div class="spinner-border" role="status" id="app_spinner">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-            <div class="container">
-                <div class="section_inner main_inner_section">
-                    <div class="action_wraper " id="app_index_body">
-                       <div class="row"> 
-                        <div class="col-6 d-flex text-center track_oder_section action_box">
-                            <img src="https://3fcb-122-170-106-103.ngrok.io/view/Icon feather-truck.png" alt="track order" >
-                            <p id="track_order_btn" onclick="trackorderPage();">Track order</p>
-                        </div>
-                        <div class="col-6 d-flex text-center track_oder_section action_box">
-                            <img src="https://3fcb-122-170-106-103.ngrok.io/view/Icon feather-gift.png" alt="reward">
-                            <p onclick="checkrewardtPage();">Reward</p>
-                        </div>
-                        <div class="col-6 d-flex text-center track_oder_section action_box">
-                            <img src="https://3fcb-122-170-106-103.ngrok.io/view/Icon awesome-whatsapp.png" alt="whatapp">
-                            <p id="whats_app" onclick="whatsappPage()">Whatsapp</p>
-                        </div>
-                        <div class="col-6 d-flex text-center track_oder_section action_box">
-                            <img src="https://3fcb-122-170-106-103.ngrok.io/view/Icon material-favorite-border.png" alt="faq">
-                            <p id="faq" onclick="faqPage()">faq</p>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="text-center w-100 wigets_footer">
-            <p>Powered by bussinessbot</p>
-        </div>
-
-
+  <div class="sigle">
+    <div class="wave">
+      <!-- svg 1 -->
+      <svg
+        version="1.1"
+        id="Shape_1_00000142895540903166544160000003796646156293961111_"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        x="0px"
+        y="0px"
+        viewBox="0 0 400 86.66"
+        style="enable-background: new 0 0 400 86.66"
+        xml:space="preserve"
+      >
+        <style type="text/css">
+          .st0 {
+            fill-rule: evenodd;
+            clip-rule: evenodd;
+            fill: #075e54;
+          }
+        </style>
+        <g id="Shape_1">
+          <g>
+            <path
+              class="st0"
+              d="M0,0v75.81c0,0,109.08-36.71,251.37-3.99c0,0,111.38,24.75,148.63,3.99V0H0z"
+            />
+          </g>
+        </g>
+      </svg>
+      <!-- svg 2 -->
+      <svg
+        version="1.1"
+        class="shave_svg_2"
+        id="Shape_1_00000142895540903166544160000003796646156293961111_"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        x="0px"
+        y="0px"
+        viewBox="0 0 400 86.66"
+        style="enable-background: new 0 0 400 86.66"
+        xml:space="preserve"
+      >
+        <style type="text/css">
+          .st0 {
+            fill-rule: evenodd;
+            clip-rule: evenodd;
+            fill: #075e54;
+          }
+        </style>
+        <g id="Shape_1">
+          <g>
+            <path
+              class="st0"
+              d="M0,0v75.81c0,0,109.08-36.71,251.37-3.99c0,0,111.38,24.75,148.63,3.99V0H0z"
+            />
+          </g>
+        </g>
+      </svg>
+      <span class="close_wigets">X</span>
+      <div class="text-header-app">
+        <h2></h2>
+        <p></p>
+      </div>
     </div>
 
-    <script>
-       
+    <div class="wigets_body">
+      <div class="spinner-border" role="status" id="app_spinner">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="container">
+        <div class="section_inner">
+          <div id="app_index_body">
+            <div class="row action_wraper">
+              <div class="faq_body">
+                <ul class="que_wraper"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    </script>
+    <div class="text-center w-100 wigets_footer d-flex">
+      <div class="footer_btn_wraper d-flex">
+        <button
+          class="footer_btn position-relative"
+          id="help"
+          onclick="faqPage(event)"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            id="Outline"
+            viewBox="0 0 24 24"
+            width="25"
+            height="25"
+          >
+            <path
+              d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm0,22A10,10,0,1,1,22,12,10.011,10.011,0,0,1,12,22Z"
+            />
+            <path
+              d="M12.717,5.063A4,4,0,0,0,8,9a1,1,0,0,0,2,0,2,2,0,0,1,2.371-1.967,2.024,2.024,0,0,1,1.6,1.595,2,2,0,0,1-1,2.125A3.954,3.954,0,0,0,11,14.257V15a1,1,0,0,0,2,0v-.743a1.982,1.982,0,0,1,.93-1.752,4,4,0,0,0-1.213-7.442Z"
+            />
+            <rect x="11" y="17" width="2" height="2" rx="1" />
+          </svg>
+          <div class="arrow-up active-tool"></div>
+        </button>
+
+        <button
+          class="footer_btn position-relative"
+          id="whatapp"
+          onclick="whatsappPage()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            version="1.1"
+            id="Capa_1"
+            x="0px"
+            y="0px"
+            viewBox="0 0 24 24"
+            style="enable-background: new 0 0 24 24"
+            xml:space="preserve"
+            width="25"
+            height="25"
+          >
+            <g id="WA_Logo">
+              <g>
+                <path
+                  style="fill-rule: evenodd; clip-rule: evenodd"
+                  d="M20.463,3.488C18.217,1.24,15.231,0.001,12.05,0    C5.495,0,0.16,5.334,0.157,11.892c-0.001,2.096,0.547,4.142,1.588,5.946L0.057,24l6.304-1.654    c1.737,0.948,3.693,1.447,5.683,1.448h0.005c6.554,0,11.89-5.335,11.893-11.893C23.944,8.724,22.708,5.735,20.463,3.488z     M12.05,21.785h-0.004c-1.774,0-3.513-0.477-5.031-1.378l-0.361-0.214l-3.741,0.981l0.999-3.648l-0.235-0.374    c-0.99-1.574-1.512-3.393-1.511-5.26c0.002-5.45,4.437-9.884,9.889-9.884c2.64,0,5.122,1.03,6.988,2.898    c1.866,1.869,2.893,4.352,2.892,6.993C21.932,17.351,17.498,21.785,12.05,21.785z M17.472,14.382    c-0.297-0.149-1.758-0.868-2.031-0.967c-0.272-0.099-0.47-0.149-0.669,0.148s-0.767,0.967-0.941,1.166    c-0.173,0.198-0.347,0.223-0.644,0.074c-0.297-0.149-1.255-0.462-2.39-1.475c-0.883-0.788-1.48-1.761-1.653-2.059    s-0.018-0.458,0.13-0.606c0.134-0.133,0.297-0.347,0.446-0.521C9.87,9.97,9.919,9.846,10.019,9.647    c0.099-0.198,0.05-0.372-0.025-0.521C9.919,8.978,9.325,7.515,9.078,6.92c-0.241-0.58-0.486-0.501-0.669-0.51    C8.236,6.401,8.038,6.4,7.839,6.4c-0.198,0-0.52,0.074-0.792,0.372c-0.272,0.298-1.04,1.017-1.04,2.479    c0,1.463,1.065,2.876,1.213,3.074c0.148,0.198,2.095,3.2,5.076,4.487c0.709,0.306,1.263,0.489,1.694,0.626    c0.712,0.226,1.36,0.194,1.872,0.118c0.571-0.085,1.758-0.719,2.006-1.413c0.248-0.694,0.248-1.29,0.173-1.413    C17.967,14.605,17.769,14.531,17.472,14.382z"
+                />
+              </g>
+            </g>
+          </svg>
+          <div class="arrow-up"></div>
+        </button>
+        <button
+          class="footer_btn position-relative"
+          id="gift"
+          onclick="checkrewardtPage(event)"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            id="Layer_1"
+            data-name="Layer 1"
+            viewBox="0 0 24 24"
+            width="25"
+            height="25"
+          >
+            <path
+              d="M20,7H18.262A5.137,5.137,0,0,0,20,3a1,1,0,0,0-2,0c0,2.622-2.371,3.53-4.174,3.841A9.332,9.332,0,0,0,15,3,3,3,0,0,0,9,3a9.332,9.332,0,0,0,1.174,3.841C8.371,6.53,6,5.622,6,3A1,1,0,0,0,4,3,5.137,5.137,0,0,0,5.738,7H4a4,4,0,0,0-4,4v1a2,2,0,0,0,2,2v5a5.006,5.006,0,0,0,5,5H17a5.006,5.006,0,0,0,5-5V14a2,2,0,0,0,2-2V11A4,4,0,0,0,20,7ZM12,2a1,1,0,0,1,1,1,7.71,7.71,0,0,1-1,3.013A7.71,7.71,0,0,1,11,3,1,1,0,0,1,12,2ZM2,11A2,2,0,0,1,4,9h7v3H2Zm2,8V14h7v8H7A3,3,0,0,1,4,19Zm16,0a3,3,0,0,1-3,3H13V14h7Zm-7-7V9h7a2,2,0,0,1,2,2v1Z"
+            />
+          </svg>
+          <div class="arrow-up"></div>
+        </button>
+        <button
+          class="footer_btn position-relative"
+          id="truck"
+          onclick="trackorderPage(event);"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            id="Layer_1"
+            data-name="Layer 1"
+            viewBox="0 0 24 24"
+            width="25"
+            height="25"
+          >
+            <path
+              d="M24,12.649a5,5,0,0,0-.256-1.581L22.405,7.051A3,3,0,0,0,19.559,5H17V4a3,3,0,0,0-3-3H3A3,3,0,0,0,0,4V19.5a3.517,3.517,0,0,0,6,2.447A3.517,3.517,0,0,0,12,19.5V19h3v.5a3.5,3.5,0,0,0,7,0V19h2ZM19.559,7a1,1,0,0,1,.948.684L21.613,11H17V7ZM2,4A1,1,0,0,1,3,3H14a1,1,0,0,1,1,1V17H2ZM3.5,21A1.5,1.5,0,0,1,2,19.5V19H5v.5A1.5,1.5,0,0,1,3.5,21ZM10,19.5a1.5,1.5,0,0,1-3,0V19h3Zm10,0a1.5,1.5,0,0,1-3,0V19h3ZM17,17V13h5v4Z"
+            />
+          </svg>
+          <div class="arrow-up"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(".footer_btn").click(function (event) {
+      const tool = $(".footer_btn_wraper").find(".active-tool");
+      if (tool) {
+        tool.removeClass("active-tool");
+      }
+      const id_footer = $(this).attr("id");
+      // console.log(id_footer);
+
+      if (id_footer == "gift") {
+        checkpointHeader();
+      }
+      if (id_footer == "help") {
+        helpHeader();
+      }
+      if (id_footer == "truck") {
+        trackHeader();
+      }
+
+      $(this).find(".arrow-up").addClass("active-tool");
+    });
+  </script>
 </section>

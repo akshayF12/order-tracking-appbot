@@ -1,6 +1,8 @@
 import { Shopify } from "@shopify/shopify-api";
-
 import topLevelAuthRedirect from "../helpers/top-level-auth-redirect.js";
+import { Webhook } from "@shopify/shopify-api/dist/rest-resources/2022-04/index.js";
+import get_one_time_url from "./billing-recurring.js";
+import saveSessionData from "./session.js";
 
 export default function applyAuthMiddleware(app) {
   app.get("/auth", async (req, res) => {
@@ -15,7 +17,7 @@ export default function applyAuthMiddleware(app) {
       "/auth/callback",
       app.get("use-online-tokens")
     );
-
+    // console.log(redirectUrl);
     res.redirect(redirectUrl);
   });
 
@@ -44,8 +46,8 @@ export default function applyAuthMiddleware(app) {
         res,
         req.query
       );
-
       const host = req.query.host;
+      saveSessionData(session, host);
       app.set(
         "active-shopify-shops",
         Object.assign(app.get("active-shopify-shops"), {
@@ -65,8 +67,8 @@ export default function applyAuthMiddleware(app) {
           `Failed to register APP_UNINSTALLED webhook: ${response.result}`
         );
       }
-
-      // Redirect to app with shop parameter upon auth
+      console.log("hello");
+      get_one_time_url(session);
       res.redirect(`/?shop=${session.shop}&host=${host}`);
     } catch (e) {
       switch (true) {

@@ -10,27 +10,41 @@ import {
 } from "@shopify/app-bridge-react";
 import { authenticatedFetch } from "@shopify/app-bridge-utils";
 import { Redirect } from "@shopify/app-bridge/actions";
-import { AppProvider as PolarisProvider } from "@shopify/polaris";
-import translations from "@shopify/polaris/locales/en.json";
 import "@shopify/polaris/build/esm/styles.css";
-
-import { HomePage } from "./components/HomePage";
+import { useDispatch, useSelector } from "react-redux";
+import UserService from "../src/components/redux/services/Userservice";
+import { useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
 
 export default function App() {
+  const shopInfo = useSelector((state) => state.usersData);
+  const shopname = `${new URL(location).searchParams.get("shop")}`;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    UserService.loadappsettings(dispatch, shopname);
+  }, []);
+
+  if (shopInfo.charge_plan.length > 0) {
+    // console.log(shopInfo.charge_plan);
+    if (shopInfo.charge_plan[0].status === "active") {
+      location.replace(shopInfo.charge_plan[0].url);
+      // console.log(shopInfo.charge_plan);
+    } else {
+      location.replace(shopInfo.charge_plan[0].url);
+      // console.log(shopInfo.charge_plan);
+    }
+  }
+
   return (
-    <PolarisProvider i18n={translations}>
-      <AppBridgeProvider
-        config={{
-          apiKey: process.env.SHOPIFY_API_KEY,
-          host: new URL(location).searchParams.get("host"),
-          forceRedirect: true,
-        }}
+    <>
+      <Spinner
+        animation="border"
+        role="status"
+        className="text-center spiner_custom"
       >
-        <MyProvider>
-          <HomePage />
-        </MyProvider>
-      </AppBridgeProvider>
-    </PolarisProvider>
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    </>
   );
 }
 

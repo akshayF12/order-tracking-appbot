@@ -1,0 +1,95 @@
+{
+  "metiz-trannie.myshopify.com": {
+    "check_recurring_charge": [
+      {
+        "session": {
+          "id": "9ccb0610-7f69-45e8-80f2-f396012b1198",
+          "shop": "metiz-trannie.myshopify.com",
+          "state": "646131633839180",
+          "isOnline": true,
+          "accessToken": "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",
+          "expires": "2022-06-01T13:06:24.341Z",
+          "scope": "write_products,write_customers,write_draft_orders,write_script_tags",
+          "onlineAccessInfo": {
+            "expires_in": 86397,
+            "associated_user_scope": "write_products,write_customers,write_draft_orders,write_script_tags",
+            "session": null,
+            "account_number": null,
+            "associated_user": {
+              "id": 66221703317,
+              "first_name": "Manthan",
+              "last_name": "Bhavsar",
+              "email": "metizsoft@gmail.com",
+              "account_owner": true,
+              "locale": "en-IN",
+              "collaborator": false,
+              "email_verified": true
+            }
+          }
+        },
+        "id": 26769162389,
+        "name": "Super Duper Plan",
+        "api_client_id": 6768385,
+        "price": "10.00",
+        "status": "cancelled",
+        "return_url": "http://metiz-trannie.myshopify.com/",
+        "billing_on": null,
+        "created_at": "2022-05-31T06:16:30-04:00",
+        "updated_at": "2022-05-31T09:01:20-04:00",
+        "test": true,
+        "activated_on": "2022-05-31",
+        "cancelled_on": "2022-05-31",
+        "trial_days": 0,
+        "trial_ends_on": "2022-05-31",
+        "decorated_return_url": "http://metiz-trannie.myshopify.com/?charge_id=26769162389"
+      }
+    ]
+  },
+  "metizapptest.myshopify.com": {
+    "check_recurring_charge": [
+      {
+        "session": {
+          "id": "6c6c0f6a-5354-4218-8263-00e8b9c5aeb7",
+          "shop": "metizapptest.myshopify.com",
+          "state": "436434378440830",
+          "isOnline": true,
+          "accessToken": "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",
+          "expires": "2022-06-01T12:36:47.942Z",
+          "scope": "write_products,write_customers,write_draft_orders,write_script_tags",
+          "onlineAccessInfo": {
+            "expires_in": 86398,
+            "associated_user_scope": "write_products,write_customers,write_draft_orders,write_script_tags",
+            "session": null,
+            "account_number": null,
+            "associated_user": {
+              "id": 1340801047,
+              "first_name": "Manthan",
+              "last_name": "Bhavsar",
+              "email": "metizsoft@gmail.com",
+              "account_owner": true,
+              "locale": "en-IN",
+              "collaborator": false,
+              "email_verified": true
+            }
+          }
+        },
+        "id": 22790144023,
+        "name": "Super Duper Plan",
+        "api_client_id": 6768385,
+        "price": "10.00",
+        "status": "pending",
+        "return_url": "http://metizapptest.myshopify.com/",
+        "billing_on": null,
+        "created_at": "2022-05-31T05:56:43-04:00",
+        "updated_at": "2022-05-31T05:56:43-04:00",
+        "test": true,
+        "activated_on": null,
+        "cancelled_on": null,
+        "trial_days": 0,
+        "trial_ends_on": null,
+        "decorated_return_url": "http://metizapptest.myshopify.com/?charge_id=22790144023",
+        "confirmation_url": "https://metizapptest.myshopify.com/admin/charges/6768385/22790144023/RecurringApplicationCharge/confirm_recurring_application_charge?signature=BAh7BzoHaWRsKwgXAGZOBQA6EmF1dG9fYWN0aXZhdGVU--0e6c5e01990da45d7e58a35f0c56b50d7589da5d"
+      }
+    ]
+  }
+}

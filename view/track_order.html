@@ -1,99 +1,109 @@
 <div class="track_oder_body">
-    <div class="header_oder_track text-center">
-        Track Order
-    </div>
+  <div class="header_oder_track text-center d-none">Track Order</div>
 
-    <div class="track_oder_body" id="GFG">
-        <form id="form_data_track_oder">
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Oder id</label>
-              <input type="text" class="form-control" id="oder_number" name="order_no">
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Phone Number</label>
-              <input type="text" class="form-control" id="customer_phone_number" name="phone_no">
-            </div>
-           
-        </form>
-        <button class="btn_track_order btn" id="track">Track</button>
-    </div>
-        <div class="display_oder_status">
-            <div id="opt_oder_details">
+  <div class="track_oder_body" id="GFG">
+    <form id="form_data_track_oder">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Order id</label>
+        <input
+          type="text"
+          class="form-control"
+          id="oder_number"
+          name="order_no"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label"
+          >Phone Number</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="customer_phone_number"
+          name="phone_no"
+        />
+      </div>
+    </form>
+    <button class="btn_track_order" id="track">Track</button>
+  </div>
+  <div class="display_oder_status">
+    <div id="opt_oder_details"></div>
+    <div id="opt_product"></div>
+  </div>
+  <div class="error_message">
+    <span class="text-danger"></span>
+  </div>
 
-            </div>
-            <div  id="opt_product">
+  <script>
+    $(document).ready(function () {
+      $("#track").click(function () {
+        $("#track").prop("disabled", true);
+        var x = $("#form_data_track_oder").serializeArray();
+        const oderNo = x[0].value;
+        const phoneNo = x[1].value;
+        getTrackoder(oderNo, phoneNo);
+      });
+    });
+
+    async function getTrackoder(order, phone) {
+      $.ajax({
+        url: `https://wmt7gctnoc.execute-api.us-east-2.amazonaws.com/default/ShopifyAppProxy?client_id=https://${ord_domain}&type=track_order&phone=${phone}&orderid=${order}`,
+        type: "GET",
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader("Accept", "*/*");
+        },
+        success: function (data) {
+          if (data.errorMessage) {
+            apierrorData(data);
+          } else {
+            $("#GFG").hide();
+            appendData(data);
+            $("#track").prop("disabled", false);
+          }
+        },
+      });
+    }
+
+    function apierrorData(data) {
+      $(".display_oder_status").hide();
+      $(".error_message").show();
+      if ($(".error_message span").length > 0) {
+        $(".error_message span").empty();
+      }
+      $(".error_message span").append(`${data.errorMessage}`);
+      setTimeout(() => {
+        $(".error_message").hide();
+        $("#track").prop("disabled", false);
+      }, 1500);
+    }
+
+    function appendData(data) {
+      $(".display_oder_status").show();
+      $(".error_message").hide();
+      const productDetails = data.lineItems;
+      const name = data.name;
+      const odrderStatus = data.displayFulfillmentStatus;
+      // console.log(data)
+      $("#opt_oder_details").append(
+        `<p>Order Id: ${name}</p><p>Status: ${odrderStatus}</p>`
+      );
+
+      $.each(productDetails, function (i, field) {
+        $.each(field, function (index, value) {
+          const productTitle = value.node.product.title;
+          const id = `p${index}`;
+          const productQuantity = value.node.quantity;
+          $(
+            "#opt_product"
+          ).append(`<div id="p${index}"><p>Product Title: ${productTitle}</p>
                     
-            </div>
-        </div>
-        <div class="error_message">
-            <span class="text-danger"></span>
-        </div>
+                    </div>`);
+        });
 
-
-        <script>
-            
-            $(document).ready(function() {
-                $("#track").click(function() {
-                    var x = $("#form_data_track_oder").serializeArray();
-                      const oderNo = x[0].value;
-                      const phoneNo = x[1].value;  
-                      getTrackoder(oderNo,phoneNo);
-                });
-            });
-    
-        async function getTrackoder(order,phone) {
-            $.ajax({
-                 url: `https://wmt7gctnoc.execute-api.us-east-2.amazonaws.com/default/ShopifyAppProxy?client_id=https://test-store-bob.myshopify.com&type=track_order&phone=${phone}&orderid=${order}`,
-                 type: "GET",
-                beforeSend: function(xhr){xhr.setRequestHeader('Accept', '*/*');},
-                success: function(data) {if(data.errorMessage) {
-                  apierrorData(data);  
-                }else{
-                   $('#GFG').hide(); 
-                    appendData(data);
-                }
-            }
-         });
-    
-    
-        }; 
-    
-        function apierrorData(data){
-            $('.display_oder_status').hide();
-            $('.error_message').show();
-            if ($('.error_message span').length > 0) {
-                $('.error_message span').empty();
-            }
-            $('.error_message span').append(`${data.errorMessage}`)
-            console.log(data)
-        }
-        
-        
-        
-        function appendData(data){
-            $('.display_oder_status').show();
-            $('.error_message').hide();
-            const productDetails = data.lineItems;
-            const name = data.shippingAddress.name;
-            const odrderStatus = data.displayFulfillmentStatus;
-            console.log()
-            $("#opt_oder_details").append(`<p>Name: ${name}</p><p>Status: ${odrderStatus}</p>`);
-    
-            $.each(productDetails, function(i, field) {
-                $.each(field, function( index, value ) {
-                    const productTitle = value.node.product.title;
-                    const id = `p${index}`
-                    const productQuantity = value.node.quantity;
-                    $("#opt_product").append(`<div id="p${index}"><p>Product Title: ${productTitle}</p>
-                     <p>Quantity: ${productQuantity}</p>
-                    </div>`);        
-                });
-               
-                        // $("#output").append(field.node.product + ":"
-                        //         + field.value + " ");
-            });
-        //    console.log(data.lineItems)     
-        };
-    
-            </script>
+        // $("#output").append(field.node.product + ":"
+        //         + field.value + " ");
+      });
+      //    console.log(data.lineItems)
+    }
+  </script>
 </div>

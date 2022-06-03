@@ -1,29 +1,27 @@
-import React, {useCallback, useState,useEffect} from 'react';
-import {
-  Card,
-  TextContainer,
-  RadioButton,
-  Stack
-} from "@shopify/polaris";
+import React, { useCallback, useState, useEffect } from "react";
+import { Card, TextContainer, RadioButton, Stack } from "@shopify/polaris";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { getSessionToken } from "@shopify/app-bridge-utils";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import UserService from "./redux/services/Userservice";
 
 export function ProductsCard() {
-  const [value, setValue] = useState('Disabled');
+  const shopName = new URL(location).searchParams.get("shop");
+  const [value, setValue] = useState("Disabled");
 
-  const handleChange = useCallback(
-    (_checked, newValue) => {setValue(newValue)
-      appStatussettings(newValue);
-    },
-    [],
-  );
+  const dispatch = useDispatch();
+  const shopInfo = useSelector((state) => state.usersData);
+  console.log(shopInfo);
+  const handleChange = useCallback((_checked, newValue) => {
+    setValue(newValue);
+    appStatussettings(newValue);
+  }, []);
 
   const app = useAppBridge();
   // const fetch = userLoggedInFetch(app);
-  
-  
-async function appStatussettings(status) {
+
+  async function appStatussettings(status) {
     const axios_instance = axios.create();
     // Intercept all requests on this Axios instance
     axios_instance.interceptors.request.use(async function (config) {
@@ -32,47 +30,47 @@ async function appStatussettings(status) {
       config.headers["Authorization"] = `Bearer ${token}`;
       return config;
     });
-  
-   const data = await axios_instance.post('/shop-admin-active-status',
-    { status: status}
-   )
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    const data = await axios_instance
+      .post("/shop-admin-active-status", {
+        status: status,
+        shop_name: shopName,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
-const getappActiveStatus = async() => { 
-  const axios_instance = axios.create();
-  // Intercept all requests on this Axios instance
-  axios_instance.interceptors.request.use(async function (config) {
-    const token = await getSessionToken(app);
-    // Append your request headers with an authenticated token
-    config.headers["Authorization"] = `Bearer ${token}`;
-    return config;
-  });
+  const getappActiveStatus = async () => {
+    const axios_instance = axios.create();
+    // Intercept all requests on this Axios instance
+    axios_instance.interceptors.request.use(async function (config) {
+      const token = await getSessionToken(app);
+      // Append your request headers with an authenticated token
+      config.headers["Authorization"] = `Bearer ${token}`;
+      return config;
+    });
 
- const data = await axios_instance.get('/shop-app-active-status',)
-  .then(function (response) {
-    console.log(response);
-    if (response.data.app_status == 'Active') {
-      setValue('Active');
-    }else{
-      setValue('Disabled')
-    }
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-
-}
+    const data = await axios_instance
+      .get("/shop-app-active-status")
+      .then(function (response) {
+        UserService.loadUsers(dispatch, response.data);
+        if (response.data.app_status == "Active") {
+          setValue("Active");
+        } else {
+          setValue("Disabled");
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
     getappActiveStatus();
   }, []);
-  
 
   return (
     <>

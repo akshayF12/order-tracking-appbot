@@ -1,5 +1,5 @@
 <div class="get_code_body">
-  <div class="clipboard">
+  <!-- <div class="clipboard">
     <input
       onclick="copy()"
       class="copy-input"
@@ -27,19 +27,21 @@
     <div class="text_code">
       <p>congratulation!! you can now use above coupon code to get discount</p>
     </div>
+  </div> -->
+  <div class="text_code">
+    <p>congratulation!! you can now use above coupon code to get discount</p>
   </div>
   <div id="copied-success" class="copied">
     <span>Copied!</span>
   </div>
   <script>
     function copy() {
-        var copyText = document.getElementById("copyClipboard");
-                 copyText.select();
-                 copyText.setSelectionRange(0, 99999);
-                 document.execCommand("copy");
-                $('#copied-success').fadeIn(800);
-                $('#copied-success').fadeOut(800);
-            
+      var copyText = document.getElementById("copyClipboard");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+      $("#copied-success").fadeIn(800);
+      $("#copied-success").fadeOut(800);
     }
   </script>
 </div>
