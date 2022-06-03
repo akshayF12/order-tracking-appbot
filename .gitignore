@@ -3,13 +3,14 @@
 
 # Dependency directory
 node_modules
+.husky
+.github
 
 # Test coverage directory
 coverage
 
 # Ignore Apple macOS Desktop Services Store
 .DS_Store
-
 # Logs
 logs
 *.log
